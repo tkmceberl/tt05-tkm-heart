@@ -12,8 +12,8 @@ module tt04_sahrdaya_lfsr (
 //);
 lfsr4 uut  (
     .clk(clk),
-    .reset(io_in[0]),
-    .mod(io_in[3:1])
-    .lfsr(io_out[3:0])
+    .reset(ui_in[0]),
+    .mod(ui_in[3:1])
+    .lfsr(uo_out[3:0])
 );
 endmodule
