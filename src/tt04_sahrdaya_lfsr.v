@@ -4,6 +4,7 @@ module tt04_sahrdaya_lfsr (
     input  wire [3:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [3:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
     input  wire       clk,      // clock);
+);
 //lfsr4 uut (
 //    .clk(clk),
 //    .reset(io_in[0]),
