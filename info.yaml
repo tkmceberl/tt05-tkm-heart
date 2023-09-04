@@ -43,7 +43,7 @@ documentation:
   - When the `reset` signal is asserted (high), the LFSR is reset to a predefined initial state, `4'b1010`. This ensures a known starting point for the pseudo-random sequence.
   
 - **Feedback Logic:**
-  - Depending on the value of `mod`, the module employs specific feedback logic to generate the next state of the LFSR:
+    - Depending on the value of `mod`, the module employs specific feedback logic to generate the next state of the LFSR
     - For example, when `mod` is 0, it uses the feedback polynomial `x^3 + x + 1`, updating the LFSR accordingly.
     - Different `mod` values correspond to distinct feedback polynomials, offering diverse sequence generation capabilities.
   
@@ -60,7 +60,7 @@ This Verilog module provides a versatile and configurable LFSR implementation th
    - To start the testing process, you can initially assert the `reset` signal (set it to '1') to ensure the LFSR is in a known initial state.
 3. **Configuration via `mod` Input:**
    - The `mod` input (a 3-bit input) allows you to configure the feedback polynomial of the LFSR and, consequently, its behavior.
-   - Experiment with different values for the `mod` input to see how it affects the LFSR's output:
+   - Experiment with different values for the `mod` input to see how it affects the LFSR's output
      - Set `mod` to 0, 1, 2, 3, 4, 5, or 6 to choose from different predefined feedback polynomials.
      - Observe how the LFSR generates pseudo-random sequences based on the selected feedback polynomial.
 4. **Observing Output:**
@@ -88,7 +88,8 @@ By following these instructions, you can effectively test and observe the behavi
     - output bit 1
     - output bit 2
     -output bit 3
-
+  bidirectional:
+  - NA
 
 # The following fields are optional
   tag:          "timer, test"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
