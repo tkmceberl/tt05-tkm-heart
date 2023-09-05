@@ -27,69 +27,54 @@ documentation:
   description:  "4-bit Linear Feedback Shift Register with configurable feedback polynomials based on the `mod` input, and it resets to the initial state when `reset` is asserted."
 
 # Longer description of how the project works. You can use standard markdown format.
-  how_it_works:
-- **Clock and Reset Control:**
-  - The module operates synchronously with a clock signal (`clk`) and includes an asynchronous reset signal (`reset`) to reset the LFSR to a known initial state.
-  
-- **LFSR Operation:**
-  - The core of this module is the 4-bit LFSR, which consists of four flip-flops representing a shift register. It generates a pseudo-random sequence of 4 bits.
-  - The LFSR's state is updated on the positive edge of the clock signal (`clk`).
-  
-- **Feedback Polynomials:**
-  - The module provides flexibility by allowing the user to select one of several feedback polynomials using the `mod` input (a 3-bit input).
-  - Different feedback polynomials change the behavior of the LFSR, resulting in different pseudo-random sequences.
-  
-- **Reset Behavior:**
-  - When the `reset` signal is asserted (high), the LFSR is reset to a predefined initial state, `4'b1010`. This ensures a known starting point for the pseudo-random sequence.
-  
-- **Feedback Logic:**
-    - Depending on the value of `mod`, the module employs specific feedback logic to generate the next state of the LFSR
-    - For example, when `mod` is 0, it uses the feedback polynomial `x^3 + x + 1`, updating the LFSR accordingly.
-    - Different `mod` values correspond to distinct feedback polynomials, offering diverse sequence generation capabilities.
-  
-- **Output:**
-  - The output of the LFSR is available as a 4-bit signal `lfsr`.
-  
-This Verilog module provides a versatile and configurable LFSR implementation that can be employed in various digital design applications, including pseudo-random sequence generation, data scrambling, and more. The choice of feedback polynomial through the `mod` input allows for customization of the LFSR's behavior, making it a valuable component in digital circuit design.
+  how_it_works: |
+      Uses a set of registers to divide the clock, and then some combinational logic
+      to convert from binary to decimal for the display.
+
+      Puts the bottom 8 bits of the counter on the bidirectional outputs.
+
+      With all the inputs set to 0, the internal 24 bit compare is set to 10,000,000. This means the
+      counter will increment by one each second.
+
+      If any inputs are non zero, then the input will be used as an bits 11 to 18 of the 24 bit compare register.
+      Example: setting the inputs to 00010000 will program 16384 into the compare register.
+      With a 10MHz clock the counter will increment ~610 times per second.
+
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
-  how_to_test:
-1. **Clock Input Setup:**
-   - Ensure that you have a clock signal (`clk`) with a frequency of 10 MHz available. If you don't have an external clock source, you can use a clock signal generator or simulate the module using a Verilog simulator with an appropriate clock signal.
-2. **Reset Control:**
-   - The module includes an asynchronous reset signal (`reset`).
-   - To start the testing process, you can initially assert the `reset` signal (set it to '1') to ensure the LFSR is in a known initial state.
-3. **Configuration via `mod` Input:**
-   - The `mod` input (a 3-bit input) allows you to configure the feedback polynomial of the LFSR and, consequently, its behavior.
-   - Experiment with different values for the `mod` input to see how it affects the LFSR's output
-     - Set `mod` to 0, 1, 2, 3, 4, 5, or 6 to choose from different predefined feedback polynomials.
-     - Observe how the LFSR generates pseudo-random sequences based on the selected feedback polynomial.
-4. **Observing Output:**
-   - The output of the LFSR is available as a 4-bit signal `lfsr`.
-   - Connect `lfsr` to any suitable output device or use it as needed in your larger digital design.
-5. **Clock Generation or Simulation:**
-   - Ensure that the clock signal (`clk`) continues to run during your testing. If you're simulating the module, advance the simulation time to observe changes in the LFSR output over time.
-6. **Counting Behavior:**
-   - With the reset initially asserted and `mod` set to a specific value (e.g., 0), observe how the LFSR behaves.
-   - After releasing the reset signal, the LFSR should start counting. For example, with `mod` set to 0, it will count up sequentially, producing a new 4-bit value on `lfsr` every clock cycle.
-   - If `mod` is changed to different values, the counting behavior may change based on the selected feedback polynomial.
-7. **Testing Variations:**
-   - Experiment with different `mod` values and clock frequencies to explore the versatility of the LFSR in generating various pseudo-random sequences or patterns.
-By following these instructions, you can effectively test and observe the behavior of the `lfsr4` Verilog module, allowing you to understand how the LFSR generates sequences based on different feedback polynomials and configurations.
+  how_to_test:  |
+      After reset, the counter should increase by one every second with a 10MHz input clock.
+      Experiment by changing the inputs to change the counting speed.
+
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
-    - reset
-    - mod bit 0
-    - mod bit 1
-    - mod bit 2
-    - clk
+    - compare bit 11
+    - compare bit 12
+    - compare bit 13
+    - compare bit 14
+    - compare bit 15
+    - compare bit 16
+    - compare bit 17
+    - compare bit 18
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
-    - output bit 0
-    - output bit 1
-    - output bit 2
-    -output bit 3
+    - segment a
+    - segment b
+    - segment c
+    - segment d
+    - segment e
+    - segment f
+    - segment g
+    - dot
+# A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
   bidirectional:
-  - NA
+    - second counter bit 0
+    - second counter bit 1
+    - second counter bit 2
+    - second counter bit 3
+    - second counter bit 4
+    - second counter bit 5
+    - second counter bit 6
+    - second counter bit 7
 
 # The following fields are optional
   tag:          "timer, test"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
