@@ -8,7 +8,7 @@ module tt_um_sahrdayalfsr (
    output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n 
+    input  wire       rst_n
 );
 assign uio_out = 8'h00;
 	assign uio_oe  = 8'h00;
