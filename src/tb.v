@@ -26,7 +26,7 @@ module tb ();
     wire [6:0] segments = uo_out[6:0];
     wire [7:0] uo_out;
     wire [7:0] uio_out;
-    wire [7:0] uio_oe;
+    // wire [7:0] uio_oe;
 
     tt_um_sahrdayalfsr tt_um_sahrdayalfsr (
     // include power ports for the Gate Level test
