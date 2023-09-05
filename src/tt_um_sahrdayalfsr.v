@@ -10,7 +10,9 @@ module tt_um_sahrdayalfsr (
     input  wire       clk,      // clock
     input  wire       rst_n 
 );
-
+assign uio_out = 8'h00;
+	assign uio_oe  = 8'h00;
+     assign uo_out[7:4]=4'b0000;
 //lfsr4 uut (
 //    .clk(clk),
 //    .reset(io_in[0]),
