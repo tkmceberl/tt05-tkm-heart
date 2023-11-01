@@ -20,7 +20,7 @@ module tt_um_tkmheart (
 //);
 th_flt th_flt  (
     .clk(clk),
-    .reset(ui_in[0]),
+    .rst(ui_in[0]),
 	.threshold(ui_in[1]),
 	.Higher(ui_in[2]),
 	.in(ui_in[5:3]),
