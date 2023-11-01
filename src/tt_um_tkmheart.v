@@ -23,7 +23,7 @@ th_flt th_flt  (
     .rst(ui_in[0]),
 	.threshold(ui_in[1]),
 	.Higher(ui_in[2]),
-	.in(ui_in[5:3]),
+	.in(ui_in[6:3]),
 	.fop(uo_out[7:0]),
 	.peak(uio_out[0])
 );
