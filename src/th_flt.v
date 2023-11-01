@@ -10,9 +10,9 @@ module th_flt( input clk, rst,threshold,Higher,
   
   always @(posedge clk or negedge rst) begin
     if(~rst) begin
-      th<=8'b00;
-      inst<=8'b00;
-      fltop<=8'b00;
+      th<=8'b00000000;
+      inst<=8'b00000000;
+      fltop<=8'b00000000;
     end
     else 
       case({threshold,Higher})
