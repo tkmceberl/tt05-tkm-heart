@@ -1,18 +1,14 @@
 `timescale 1ns / 1ps
-
-
-
 module th_flt( input clk, rst,threshold,Higher,
-              input [3:0] in,output [7:0] fop,
+              input [3:0] in,output reg [7:0] fop,
               output peak);
   wire clk2;
-  reg [7:0] th , inst , fltop;
+  reg [7:0] th , inst ;
   
   always @(posedge clk or negedge rst) begin
     if(~rst) begin
-      th<=8'b00000000;
-      inst<=8'b00000000;
-      fltop<=8'b00000000;
+      th<=8'b00;
+      inst<=8'b00;
     end
     else 
       case({threshold,Higher})
@@ -24,13 +20,21 @@ module th_flt( input clk, rst,threshold,Higher,
   end
   
   always @(negedge clk) 
+    if(~rst)
+      fop<=8'd0;
+  else
     if((inst>th)&(Higher))
-      fltop<=inst;
+      fop<=inst;
+    else
+      fop<=fop;
   
-  assign fop=fltop;
-  
-  pk_dt a1(.in(fltop),.clk(clk2),.rst(rst),.peak(peak));
+  pk_dt a1(.in(fop),.clk(clk2),.rst(rst),.peak(peak));
   
   clk_div2 a2(.clk(clk),.rst(rst),.clko(clk2));
           
 endmodule
+
+
+
+
+  
