@@ -29,14 +29,14 @@ documentation:
   description:  "The design integrates a threshold-based filtering mechanism followed by peak detection on the filtered data."
 
 # Longer description of how the project works. You can use standard markdown format.
-  how_it_works: |
+  how_it_works: 
 The pk_dt module implements a peak detection circuit that checks for the occurrence of a peak in the input data stream over three consecutive clock cycles.
 The th_flt module is a threshold filter that processes the input data based on the threshold and higher flag, and then passes it to the pk_dt module.
 The clk_div2 module divides the input clock signal by 2 to generate a new clock signal clk2.
 
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
-  how_to_test:  |
+  how_to_test:  
 Keep the reset at 0 for two clock pulses.
 Change the reset to 1.
 Set the threshold pin to 1 and send the lower four bits first.
