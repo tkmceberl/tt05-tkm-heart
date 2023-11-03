@@ -23,30 +23,27 @@ yaml_version: 4
 #
 # Here is a great example: https://github.com/davidsiaw/tt02-davidsiaw-stackcalc/blob/38c5647f83aad2aec675d566aa3d67b98f0aac81/info.yaml
 documentation: 
-  author:       "Arun A V"
-  title:        "lfsr random number generator"
+  author:       "Nissan Kunju"
+  title:        "Heart Rythm Analyzer"
   language:     "Verilog"
-  description:  "4-bit Linear Feedback Shift Register with configurable feedback polynomials based on the `mod` input, and it resets to the initial state when `reset` is asserted."
+  description:  "The design integrates a threshold-based filtering mechanism followed by peak detection on the filtered data."
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      Uses a set of registers to divide the clock, and then some combinational logic
-      to convert from binary to decimal for the display.
+1. The pk_dt module implements a peak detection circuit that checks for the occurrence of a peak in the input data stream over three consecutive clock cycles.
+2. The th_flt module is a threshold filter that processes the input data based on the threshold and higher flag, and then passes it to the pk_dt module.
+3. The clk_div2 module divides the input clock signal by 2 to generate a new clock signal clk2.
 
-      Puts the bottom 8 bits of the counter on the bidirectional outputs.
-
-      With all the inputs set to 0, the internal 24 bit compare is set to 10,000,000. This means the
-      counter will increment by one each second.
-
-      If any inputs are non zero, then the input will be used as an bits 11 to 18 of the 24 bit compare register.
-      Example: setting the inputs to 00010000 will program 16384 into the compare register.
-      With a 10MHz clock the counter will increment ~610 times per second.
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      After reset, the counter should increase by one every second with a 10MHz input clock.
-      Experiment by changing the inputs to change the counting speed.
-
+      
+1. Keep the reset at 0 for two clock pulses.
+2. Change the reset to 1.
+3. Set the threshold pin to 1 and send the lower four bits first.
+4. Set the higher pin to 1 and send the higher four bits.
+5. Switch the threshold to 0.
+6. Alternate between sending the lower and higher four bits as inputs.
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
     - compare bit 11
